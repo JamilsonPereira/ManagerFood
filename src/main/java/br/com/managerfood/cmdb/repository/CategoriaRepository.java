@@ -7,5 +7,7 @@ import br.com.managerfood.cmdb.model.Categoria;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
+	
+	Categoria findById(long id);
 
 }
