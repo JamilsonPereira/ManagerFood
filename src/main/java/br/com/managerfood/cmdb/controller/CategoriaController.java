@@ -29,7 +29,7 @@ public class CategoriaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> responseBuscarPorId(@PathVariable(value = "id") long id) {
+	public ResponseEntity<Categoria> responseBuscarPorId(@PathVariable(value = "id") Long id) {
 
 		return ResponseEntity.ok(categoriaService.buscarPorId(id));
 	}
@@ -41,11 +41,11 @@ public class CategoriaController {
 
 	}
 
-	@DeleteMapping
-	public ResponseEntity<Categoria> deletaCategoria(@RequestBody Categoria categoria) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity <Void> deletaCategoria(@PathVariable(value = "id" ) Long id) {
 
-		categoriaService.deletarCategoria(categoria);
-		return null;
+		categoriaService.deletarCategoria(id);
+		return ResponseEntity.noContent().build();
 
 	}
 }

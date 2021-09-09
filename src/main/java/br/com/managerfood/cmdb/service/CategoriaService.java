@@ -1,12 +1,9 @@
 package br.com.managerfood.cmdb.service;
 
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import br.com.managerfood.cmdb.model.Categoria;
 import br.com.managerfood.cmdb.repository.CategoriaRepository;
 
@@ -22,10 +19,10 @@ public class CategoriaService {
 		return listaCategoria;
 	}
 
-	public Categoria buscarPorId(@PathVariable(value = "id") long id) {
+	public Categoria buscarPorId(Long id){
 
-		Categoria listarPorId = categoriaRepository.findById(id);
-		return listarPorId;
+		Optional<Categoria> listarPorId = categoriaRepository.findById(id);
+		return listarPorId.get();
 	}
 
 	public Categoria criarCategoria(Categoria entity) {
@@ -33,8 +30,8 @@ public class CategoriaService {
 		return retornoCategoria;
 	}
 
-	public void deletarCategoria(Categoria entity) {
-		categoriaRepository.delete(entity);
+	public void deletarCategoria(Long id) {
+		categoriaRepository.deleteById(id);
 		
 	}
 
