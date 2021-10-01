@@ -7,28 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import br.com.managerfood.cmdb.dto.ProdutoDto;
+import br.com.managerfood.cmdb.mapper.PedidoMapper;
+import br.com.managerfood.cmdb.mapper.ProdutoMapper;
 import br.com.managerfood.cmdb.model.Produtos;
 import br.com.managerfood.cmdb.repository.ProdutosRepository;
 
 @Service
 public class ProdutoService {
 	@Autowired
-	private ProdutosRepository produtosRepository;
+	ProdutosRepository produtosRepository;
+	
+	@Autowired
+    ProdutoMapper produtosMapper;
 
-	public List<Produtos> listarProdutos() {
-		List<Produtos> produtosLista = produtosRepository.findAll();
+	public List<ProdutoDto> listarProdutos() {
+		List<ProdutoDto> produtosLista = produtosMapper.converterListaProdutosParaDto(produtosRepository.findAll());
 		return produtosLista;
 
 	}
 
-	public Produtos adicionarProdutos(Produtos entity) {
-		Produtos retornoProdutos = produtosRepository.save(entity);
-		return retornoProdutos;
+	public ProdutoDto adicionarProdutos(ProdutoDto produtoDto) {
+		Produtos retornoProdutos = produtosMapper.converteDtoParaEntidade(produtoDto);
+		Produtos retornoEntidade = produtosRepository.save(retornoProdutos);
+		return produtosMapper.converteEntidadeParaDto(retornoEntidade);
 	}
 	
-	public Produtos buscarProdutosPorId(Long id){
-		Optional<Produtos> buscarId = produtosRepository.findById(id); 
-		return buscarId.get();
+	public ProdutoDto buscarProdutosPorId(Long id){
+		ProdutoDto buscarId = produtosMapper.converteEntidadeParaDto( produtosRepository.findById(id).get()); 
+		return buscarId;
 		
 	}
 	public void deletaProdutos(Long id) {

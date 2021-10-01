@@ -17,18 +17,18 @@ public class ProdutoMapper {
 		return new Produtos(produtoDto.getId(), produtoDto.getNome(), produtoDto.getDescricao(), produtoDto.getValor());
 	}
 	
-	public ProdutoDto converterDtoParaEntidade(Produtos produtos) {
+	public ProdutoDto converteEntidadeParaDto(Produtos produtos) {
 		return new ProdutoDto(produtos.getId(), produtos.getNome(), produtos.getDescricao(), produtos.getValor());
 	}
 	
-	public List<Produtos> converterListaProdutosParaDto(List<ProdutoDto> listaDto){
+	public List<Produtos> converterListaDtoParaEntidade(List<ProdutoDto> list){
 
-		return listaDto.stream().map(valor -> new Produtos(valor.getId(), valor.getNome(), valor.getDescricao(), valor.getValor()))
+		return list.stream().map(valor -> new Produtos(valor.getId(), valor.getNome(), valor.getDescricao(), valor.getValor()))
 				.collect(Collectors.toList());
 		
 	}
 	
-	public List<ProdutoDto> converterListaDtoParaEntidade(List<Produtos> produtoList){
+	public List<ProdutoDto> converterListaProdutosParaDto(List<Produtos> produtoList){
 
 		return produtoList.stream().map(valor -> new ProdutoDto(valor.getId(), valor.getNome(), valor.getDescricao(), valor.getValor()))
 				.collect(Collectors.toList()); 

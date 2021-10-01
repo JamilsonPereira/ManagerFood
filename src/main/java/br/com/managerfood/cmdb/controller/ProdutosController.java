@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.managerfood.cmdb.dto.ProdutoDto;
 import br.com.managerfood.cmdb.model.Produtos;
 import br.com.managerfood.cmdb.service.ProdutoService;
 
@@ -24,19 +25,19 @@ public class ProdutosController {
 	private ProdutoService produtosService;
 
 	@GetMapping
-	public ResponseEntity<List<Produtos>> responseProdutos() {
+	public ResponseEntity<List<ProdutoDto>> responseProdutos() {
 
 		return ResponseEntity.ok(produtosService.listarProdutos());
 	}
 
 	@PostMapping
-	public ResponseEntity<Produtos> adicionarProdutos(@RequestBody Produtos produtos) {
+	public ResponseEntity<ProdutoDto> adicionarProdutos(@RequestBody ProdutoDto produtos) {
 
 		return ResponseEntity.ok(produtosService.adicionarProdutos(produtos));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Produtos> responseBuscaId(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<ProdutoDto> responseBuscaId(@PathVariable(value = "id") Long id) {
 		return ResponseEntity.ok(produtosService.buscarProdutosPorId(id));
 
 	}
