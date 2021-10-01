@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.managerfood.cmdb.dto.PedidoDto;
 import br.com.managerfood.cmdb.model.Pedido;
 import br.com.managerfood.cmdb.service.PedidoService;
 
@@ -23,16 +24,16 @@ public class PedidoController {
 	PedidoService pedidoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Pedido>> responseListaDePedidos(){
+	public ResponseEntity<List<PedidoDto>> responseListaDePedidos(){
 		return ResponseEntity.ok(pedidoService.listarPedido());
 		
 	}
 	@PostMapping
-	public ResponseEntity<Pedido> adicionarPedido(@RequestBody Pedido entity) {
+	public ResponseEntity<PedidoDto> adicionarPedido(@RequestBody PedidoDto entity) {
 		return ResponseEntity.ok(pedidoService.adicionarPedido(entity));
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Pedido> listarPedidoPorId(@PathVariable(value= "id") Long id){
+	public ResponseEntity<PedidoDto> listarPedidoPorId(@PathVariable(value= "id") Long id){
 		return ResponseEntity.ok(pedidoService.listarPorId(id));
 	}
 	@DeleteMapping("/{id}")

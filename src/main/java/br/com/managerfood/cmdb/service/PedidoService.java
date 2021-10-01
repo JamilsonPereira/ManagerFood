@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.managerfood.cmdb.dto.PedidoDto;
+import br.com.managerfood.cmdb.mapper.PedidoMapper;
 import br.com.managerfood.cmdb.model.Pedido;
 import br.com.managerfood.cmdb.repository.PedidoRepository;
 
@@ -13,19 +15,23 @@ import br.com.managerfood.cmdb.repository.PedidoRepository;
 public class PedidoService {
 	@Autowired
 	PedidoRepository pedidoRepository;
+	
+	@Autowired
+	PedidoMapper pedidoMapper;
 
-	public List<Pedido> listarPedido() {
-		List<Pedido> listaPedido = pedidoRepository.findAll();
+	public List<PedidoDto> listarPedido() {
+		List<PedidoDto> listaPedido = pedidoMapper.converterListaPedidoParaDto(pedidoRepository.findAll());
 		return listaPedido;
 	}
-	public Pedido adicionarPedido(Pedido entity) {
-		Pedido retornoPedido = pedidoRepository.save(entity);
-		return retornoPedido;
+	public PedidoDto adicionarPedido(PedidoDto dto) {
+		Pedido retornoPedido = pedidoMapper.converteDtoParaEntidade(dto);
+			Pedido retornoEntidade =	pedidoRepository.save(retornoPedido);
+		return pedidoMapper.converteEntidadeParaDto(retornoEntidade);
 	}
 
-	public Pedido listarPorId(Long id){
-		Optional<Pedido> retornoPedidoId = pedidoRepository.findById(id);
-		return retornoPedidoId.get();
+	public PedidoDto listarPorId(Long id){
+		PedidoDto retornoPedidoId = pedidoMapper.converteEntidadeParaDto(pedidoRepository.findById(id).get());
+		return retornoPedidoId;
 	}
 	public  void deletarPedido(Long id) {
 		pedidoRepository.deleteById(id);

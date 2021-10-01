@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.managerfood.cmdb.dto.CategoriaDto;
 import br.com.managerfood.cmdb.model.Categoria;
 import br.com.managerfood.cmdb.service.CategoriaService;
 
@@ -23,19 +24,19 @@ public class CategoriaController {
 	private CategoriaService categoriaService;
 
 	@GetMapping
-	public ResponseEntity<List<Categoria>> responseListaCategoria() {
+	public ResponseEntity<List<CategoriaDto>> responseListaCategoria() {
 
 		return ResponseEntity.ok(categoriaService.listarCategoria());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> responseBuscarPorId(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<CategoriaDto> responseBuscarPorId(@PathVariable(value = "id") Long id) {
 
 		return ResponseEntity.ok(categoriaService.buscarPorId(id));
 	}
 
 	@PostMapping
-	public ResponseEntity<Categoria> criarCategoria(@RequestBody Categoria categoria) {
+	public ResponseEntity<CategoriaDto> criarCategoria(@RequestBody CategoriaDto categoria) {
 
 		return ResponseEntity.ok(categoriaService.criarCategoria(categoria));
 
