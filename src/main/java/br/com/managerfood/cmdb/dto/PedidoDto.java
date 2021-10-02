@@ -18,4 +18,4 @@ public class PedidoDto {
 	private LocalDate dataPedido;
 	private Long quantidade;
 	private Float valor;
-}
+	}

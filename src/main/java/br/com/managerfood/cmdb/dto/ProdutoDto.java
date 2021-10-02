@@ -14,5 +14,5 @@ public class ProdutoDto {
 	private String nome;
 	private String descricao;
 	private Float valor;
-
+	private CategoriaDto categoria;
 }

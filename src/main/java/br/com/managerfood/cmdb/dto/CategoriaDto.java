@@ -12,4 +12,5 @@ public class CategoriaDto {
 	private Long id;
 	private String nome;
 	private String descricao;
+	
 }
